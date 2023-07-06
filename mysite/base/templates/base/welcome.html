@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block title %} welcome page {% endblock %}
+
+{% block content %} <p>welcome {{request.user}} </p>
+
+    <div class="card">
+    {% for i in post %}
+    <a href="{{ i.get_absolute_url }}" class="card-body">{{i.title}}-{{i.user}}</a>
+    {% endfor %}
+    </div>
+
+{% endblock %}

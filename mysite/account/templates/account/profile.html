@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+<H2> welcome {{user.username}} </H2>
+{% if request.user.id == user.id %}
+<a href="{% url 'account:post_create' %}" class="btn btn-info">Create</a>
+<a href="{% url 'account:reset_password' %}" class="btn btn-danger">Reset Pass</a>
+    <a href=" {%  url 'account:edit_profile'%}"  class="btn btn-info">Edit</a>
+{% endif %}
+    {% if request.user.id != user.id and not is_following %}
+    <a class="btn btn-primary" href="{% url 'account:user_follow' user.id %}">Follow</a>
+    {% elif request.user.id != user.id and is_following %}
+    <a class="btn btn-primary" href="{% url 'account:user_unfollow' user.id %}">UnFollow</a>
+    {% endif %}
+<div class="card">
+{% for i in posts %}
+    <a href="{{ i.get_absolute_url }}" class="card-body">{{i.title}}</a>
+{% endfor %}
+</div>
+{% endblock %}}
